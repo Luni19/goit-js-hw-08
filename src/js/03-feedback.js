@@ -1,57 +1,37 @@
-
 import throttle from 'lodash.throttle';
 
-const feedbackForm = document.querySelector('.feedback-form');
-const emailInput = document.querySelector('input[name="email"]');
-const messageTextarea = document.querySelector('textarea[name="message"]');
-const LC_KEY = 'feedback-form-state';
+const STORAGE_KEY = 'feedback-form-state';
 
-// Save data to local storage
-feedbackForm.addEventListener('input', throttle(handleSaveToLS, 500));
+const form = document.querySelector('.feedback-form');
 
-function handleSaveToLS() {
-  const formData = {
-    email: emailInput.value,
-    message: messageTextarea.value,
-  };
+form.addEventListener('input', throttle(onInputData, 500));
+form.addEventListener('submit', onFormSubmit);
 
-  localStorage.setItem(LC_KEY, JSON.stringify(formData));
+let dataForm = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+const { email, message } = form.elements;
+reloadPage();
+
+function onInputData(event) {
+  dataForm = { email: email.value, message: message.value };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(dataForm));
 }
 
-// Loading data from local storage
-function loadFormState() {
-  const savedFormData = localStorage.getItem(LC_KEY);
-  if (savedFormData) {
-    const formData = JSON.parse(savedFormData);
-    emailInput.value = formData.email || '';
-    messageTextarea.value = formData.message || '';
+function reloadPage() {
+  if (dataForm) {
+    email.value = dataForm.email || '';
+    message.value = dataForm.message || '';
   }
-};
+}
 
-document.addEventListener('DOMContentLoaded', loadFormState);
-
-emailInput.addEventListener('input', handleSaveToLS
-);
-messageTextarea.addEventListener('input',handleSaveToLS);
-
-feedbackForm.addEventListener('submit', handleSubmit);
-
-function handleSubmit(event) {
+function onFormSubmit(event) {
   event.preventDefault();
+  console.log({ email: email.value, message: message.value });
 
-  if (emailInput.value === '' || messageTextarea.value === '') {
-    const message = 'Please fill all fields!';
-    alert(message);
+  if (email.value === '' || message.value === '') {
+    return alert(`Будь ласка, заповніть всі обов'язкові поля.`);
   }
 
-  localStorage.removeItem(LC_KEY);
-
-  emailInput.value = '';
-  messageTextarea.value = '';
-
-  const formDataObject = {
-    email: emailInput.value,
-    message: messageTextarea.value,
-  };
-  console.log(formDataObject);
+  localStorage.removeItem(STORAGE_KEY);
+  event.currentTarget.reset();
+  dataForm = {};
 }
