@@ -5,7 +5,7 @@
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- *//** Used as the `TypeError` message for "Functions" methods. */function i(e){return e&&"undefined"!=typeof Symbol&&e.constructor===Symbol?"symbol":typeof e}var o="Expected a function",r=0/0,a=/^\s+|\s+$/g,u=/^[-+]0x[0-9a-f]+$/i,f=/^0b[01]+$/i,l=/^0o[0-7]+$/i,c=parseInt,d="object"==typeof t&&t&&t.Object===Object&&t,s="object"==typeof self&&self&&self.Object===Object&&self,v=d||s||Function("return this")(),m=Object.prototype.toString,p=Math.max,y=Math.min,g=function(){return v.Date.now()};/**
+ *//** Used as the `TypeError` message for "Functions" methods. */function i(e){return e&&"undefined"!=typeof Symbol&&e.constructor===Symbol?"symbol":typeof e}var o="Expected a function",r=0/0,a=/^\s+|\s+$/g,u=/^[-+]0x[0-9a-f]+$/i,f=/^0b[01]+$/i,l=/^0o[0-7]+$/i,c=parseInt,s="object"==typeof t&&t&&t.Object===Object&&t,d="object"==typeof self&&self&&self.Object===Object&&self,v=s||d||Function("return this")(),m=Object.prototype.toString,g=Math.max,p=Math.min,y=function(){return v.Date.now()};/**
  * Checks if `value` is the
  * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
  * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -51,7 +51,7 @@
  *
  * _.toNumber('3.2');
  * // => 3.2
- */function S(e){if("number"==typeof e)return e;if((void 0===(t=e)?"undefined":i(t))=="symbol"||t&&"object"==typeof t&&"[object Symbol]"==m.call(t))return r;if(b(e)){var t,n="function"==typeof e.valueOf?e.valueOf():e;e=b(n)?n+"":n}if("string"!=typeof e)return 0===e?e:+e;e=e.replace(a,"");var o=f.test(e);return o||l.test(e)?c(e.slice(2),o?2:8):u.test(e)?r:+e}n=/**
+ */function j(e){if("number"==typeof e)return e;if((void 0===(t=e)?"undefined":i(t))=="symbol"||t&&"object"==typeof t&&"[object Symbol]"==m.call(t))return r;if(b(e)){var t,n="function"==typeof e.valueOf?e.valueOf():e;e=b(n)?n+"":n}if("string"!=typeof e)return 0===e?e:+e;e=e.replace(a,"");var o=f.test(e);return o||l.test(e)?c(e.slice(2),o?2:8):u.test(e)?r:+e}n=/**
  * Creates a throttled function that only invokes `func` at most once per
  * every `wait` milliseconds. The throttled function comes with a `cancel`
  * method to cancel delayed `func` invocations and a `flush` method to
@@ -147,17 +147,15 @@
  *
  * // Cancel the trailing debounced invocation.
  * jQuery(window).on('popstate', debounced.cancel);
- */function(e,t,n){var i,r,a,u,f,l,c=0,d=!1,s=!1,v=!0;if("function"!=typeof e)throw TypeError(o);function m(t){var n=i,o=r;return i=r=void 0,c=t,u=e.apply(o,n)}function j(e){var n=e-l,i=e-c;// Either this is the first call, activity has stopped and we're at the
+ */function(e,t,n){var i,r,a,u,f,l,c=0,s=!1,d=!1,v=!0;if("function"!=typeof e)throw TypeError(o);function m(t){var n=i,o=r;return i=r=void 0,c=t,u=e.apply(o,n)}function S(e){var n=e-l,i=e-c;// Either this is the first call, activity has stopped and we're at the
 // trailing edge, the system time has gone backwards and we're treating
 // it as the trailing edge, or we've hit the `maxWait` limit.
-return void 0===l||n>=t||n<0||s&&i>=a}function O(){var e,n,i,o=g();if(j(o))return h(o);// Restart the timer.
-f=setTimeout(O,(e=o-l,n=o-c,i=t-e,s?y(i,a-n):i))}function h(e){return(// Only invoke if we have `lastArgs` which means `func` has been
+return void 0===l||n>=t||n<0||d&&i>=a}function T(){var e,n,i,o=y();if(S(o))return h(o);// Restart the timer.
+f=setTimeout(T,(e=o-l,n=o-c,i=t-e,d?p(i,a-n):i))}function h(e){return(// Only invoke if we have `lastArgs` which means `func` has been
 // debounced at least once.
-(f=void 0,v&&i)?m(e):(i=r=void 0,u))}function T(){var e,n=g(),o=j(n);if(i=arguments,r=this,l=n,o){if(void 0===f)return(// Reset any `maxWait` timer.
+(f=void 0,v&&i)?m(e):(i=r=void 0,u))}function O(){var e,n=y(),o=S(n);if(i=arguments,r=this,l=n,o){if(void 0===f)return(// Reset any `maxWait` timer.
 c=e=l,// Start the timer for the trailing edge.
-f=setTimeout(O,t),d?m(e):u);if(s)return(// Handle invocations in a tight loop.
-f=setTimeout(O,t),m(l))}return void 0===f&&(f=setTimeout(O,t)),u}return t=S(t)||0,b(n)&&(d=!!n.leading,a=(s="maxWait"in n)?p(S(n.maxWait)||0,t):a,v="trailing"in n?!!n.trailing:v),T.cancel=function(){void 0!==f&&clearTimeout(f),c=0,i=l=r=f=void 0},T.flush=function(){return void 0===f?u:h(g())},T}(e,t,{leading:i,maxWait:t,trailing:r})};var j=document.querySelector(".feedback-form"),O=document.querySelector('input[name="email"]'),h=document.querySelector('textarea[name="message"]'),T="feedback-form-state";function E(){var e={email:O.value,message:h.value};localStorage.setItem(T,JSON.stringify(e))}// Save data to local storage
-j.addEventListener("input",((e=n)&&e.__esModule?e.default:e)(E,500)),document.addEventListener("DOMContentLoaded",// Loading data from local storage
-function(){var e=localStorage.getItem(T);if(e){var t=JSON.parse(e);O.value=t.email||"",h.value=t.message||""}}),O.addEventListener("input",E),h.addEventListener("input",E),j.addEventListener("submit",function(e){e.preventDefault(),(""===O.value||""===h.value)&&alert("Please fill all fields!"),localStorage.removeItem(T),O.value="",h.value="",console.log({email:O.value,message:h.value})})}();//# sourceMappingURL=03-feedback.a414dc3f.js.map
+f=setTimeout(T,t),s?m(e):u);if(d)return(// Handle invocations in a tight loop.
+f=setTimeout(T,t),m(l))}return void 0===f&&(f=setTimeout(T,t)),u}return t=j(t)||0,b(n)&&(s=!!n.leading,a=(d="maxWait"in n)?g(j(n.maxWait)||0,t):a,v="trailing"in n?!!n.trailing:v),O.cancel=function(){void 0!==f&&clearTimeout(f),c=0,i=l=r=f=void 0},O.flush=function(){return void 0===f?u:h(y())},O}(e,t,{leading:i,maxWait:t,trailing:r})};var S="feedback-form-state",T=document.querySelector(".feedback-form");T.addEventListener("input",((e=n)&&e.__esModule?e.default:e)(function(e){h={email:w.value,message:x.value},localStorage.setItem(S,JSON.stringify(h))},500)),T.addEventListener("submit",function(e){if(e.preventDefault(),console.log({email:w.value,message:x.value}),""===w.value||""===x.value)return alert("Будь ласка, заповніть всі обов'язкові поля.");localStorage.removeItem(S),e.currentTarget.reset(),h={}});var h=JSON.parse(localStorage.getItem(S))||{},O=T.elements,w=O.email,x=O.message;h&&(w.value=h.email||"",x.value=h.message||"")}();//# sourceMappingURL=03-feedback.7b8af6d7.js.map
 
-//# sourceMappingURL=03-feedback.a414dc3f.js.map
+//# sourceMappingURL=03-feedback.7b8af6d7.js.map
